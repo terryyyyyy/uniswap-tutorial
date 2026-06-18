@@ -1,5 +1,3 @@
-import { Q96 } from '@/constants/uniswap'
-
 // 先在 BigInt 域完成除法，再转为 Number，避免精度丢失
 export function formatBigInt(value: bigint, decimals = 18): number {
   return Number(value / 10n ** BigInt(decimals))

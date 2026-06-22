@@ -56,6 +56,43 @@ export const validators: Record<string, (output: unknown) => boolean> = {
     typeof (output as any).amount0 === 'bigint' &&
     typeof (output as any).amount1 === 'bigint',
   'ch4-4-nft': (output) => typeof output === 'string' && output.length > 0,
+
+  // —— 第 5 章 Swap 执行 ——
+  'ch5-1-step': (output) => typeof output === 'object' && output !== null && typeof (output as any).amountIn !== 'undefined',
+  'ch5-2-cross': (output) => typeof output === 'object' && output !== null && typeof (output as any).amountOut !== 'undefined',
+  'ch5-3-impact': (output) =>
+    typeof output === 'object' && output !== null &&
+    typeof (output as any).smallImpact !== 'undefined' &&
+    typeof (output as any).largeImpact !== 'undefined',
+  'ch5-4-tick': (output) => typeof output === 'number',
+  'ch5-5-multi': (output) => typeof output === 'object' && output !== null && typeof (output as any).amountOut !== 'undefined',
+
+  // —— 第 6 章 手续费 ——
+  'ch6-1-fee': (output) => typeof output === 'bigint' && output > 0n,
+  'ch6-2-growth': (output) => typeof output === 'bigint',
+  'ch6-3-share': (output) => Array.isArray(output) && output.length === 2,
+  'ch6-4-owed': (output) => typeof output === 'bigint',
+
+  // —— 第 7 章 核心合约源码 ——
+  'ch7-1-key': (output) => typeof output === 'string' && output.includes(':'),
+  'ch7-2-init': (output) => typeof output === 'number',
+  'ch7-3-slot0': (output) =>
+    typeof output === 'object' && output !== null &&
+    typeof (output as any).sqrtPriceX96 !== 'undefined' &&
+    typeof (output as any).tick !== 'undefined',
+  'ch7-4-nodelegate': (output) => typeof output === 'boolean',
+  'ch7-5-full': (output) => typeof output === 'object' && output !== null && typeof (output as any).amountOut !== 'undefined',
+
+  // —— 第 8 章 外围合约 ——
+  'ch8-1-router': (output) => typeof output === 'bigint',
+  'ch8-2-npm': (output) =>
+    typeof output === 'object' && output !== null &&
+    typeof (output as any).tokenId !== 'undefined' &&
+    typeof (output as any).liquidity !== 'undefined',
+  'ch8-3-quote': (output) => typeof output === 'bigint',
+  'ch8-4-grad': (output) =>
+    typeof output === 'object' && output !== null &&
+    typeof (output as any).amountOut !== 'undefined',
 }
 
 export function getValidator(key: string): (output: unknown) => boolean {

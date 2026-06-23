@@ -1,6 +1,9 @@
 import MarkdownIt from 'markdown-it'
-import katex from '@vscode/markdown-it-katex'
+import katexPlugin from '@vscode/markdown-it-katex'
 import hljs from 'highlight.js'
+
+// @vscode/markdown-it-katex 的导出在 ESM 互操作下可能是 { default: fn }，需解包成真正的插件函数
+const katex = (katexPlugin as any).default ?? katexPlugin
 
 // 自定义容器：:::tip / :::warning / :::visual / :::code-ref
 function containerPlugin(md: MarkdownIt) {

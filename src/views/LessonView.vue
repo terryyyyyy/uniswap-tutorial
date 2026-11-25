@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { ElButton, ElMessage, ElTabPane, ElTabs } from 'element-plus'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
 import { lessons } from '@/data/lessons'
 import { useProgressStore } from '@/stores/progress'
 import { useSandboxStore } from '@/stores/sandbox'
@@ -35,7 +35,7 @@ const onQuizPass = ({ firstTry }: { firstTry: boolean }) => {
 
 const next = () => {
   const [c, o] = props.id.split('-').map(Number)
-  router.push(`/lesson/${c}-${o + 1}`)
+  router.push(`/v3/lesson/${c}-${o + 1}`)
 }
 
 const validator = (key: string, output: unknown) => getValidator(key)(output)

@@ -1,4 +1,8 @@
-<script setup lang="ts">defineProps<{ title: string; description: string }>()</script>
+<script setup lang="ts">
+import { ElCard } from 'element-plus'
+
+defineProps<{ title: string; description: string }>()
+</script>
 
 <template>
   <el-card class="task">

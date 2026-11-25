@@ -4,8 +4,8 @@ import { useProgressStore } from '@/stores/progress'
 import { useRouter } from 'vue-router'
 const store = useProgressStore()
 const router = useRouter()
-const open = (id: string, unlocked: boolean) => { if (unlocked) router.push(`/lesson/${id}`) }
-const openChapter = (id: number, unlocked: boolean) => { if (unlocked) router.push(`/chapter/${id}`) }
+const open = (id: string, unlocked: boolean) => { if (unlocked) router.push(`/v3/lesson/${id}`) }
+const openChapter = (id: number, unlocked: boolean) => { if (unlocked) router.push(`/v3/chapter/${id}`) }
 </script>
 <template>
   <div class="level-map">

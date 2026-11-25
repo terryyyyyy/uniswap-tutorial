@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElInput, ElRadio, ElRadioGroup } from 'element-plus'
 import { ref } from 'vue'
 import type { Quiz } from '@/types'
 import CodeSandbox from './CodeSandbox.vue'

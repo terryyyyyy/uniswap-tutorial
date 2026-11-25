@@ -6,7 +6,7 @@ const { totalStars, badges } = storeToRefs(useProgressStore())
 <template>
   <header class="app-header">
     <div class="brand">🦄 Uniswap V3 合约教程</div>
-    <div class="stats"><span>⭐ {{ totalStars }}</span><span>🏆 {{ badges.length }}</span></div>
+    <div class="stats"><RouterLink to="/">新版 v4 教程 →</RouterLink><span>⭐ {{ totalStars }}</span><span>🏆 {{ badges.length }}</span></div>
   </header>
 </template>
 <style scoped lang="scss">

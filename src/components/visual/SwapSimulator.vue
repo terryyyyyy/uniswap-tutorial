@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElButton } from 'element-plus'
 import { ref } from 'vue'
 import { PoolSimulator } from '@/simulations/pool'
 import { Q96 } from '@/constants/uniswap'

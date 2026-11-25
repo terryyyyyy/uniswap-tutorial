@@ -7,7 +7,7 @@ const props = defineProps<{ id: string }>()
 const router = useRouter()
 const store = useProgressStore()
 const ch = computed(() => chapters.find((c) => c.id === Number(props.id)))
-const go = (id: string) => router.push(`/lesson/${id}`)
+const go = (id: string) => router.push(`/v3/lesson/${id}`)
 </script>
 
 <template>

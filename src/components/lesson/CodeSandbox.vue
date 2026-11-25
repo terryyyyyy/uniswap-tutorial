@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElButton } from 'element-plus'
 import { ref, watch } from 'vue'
 import { useSandbox } from '@/composables/useSandbox'
 import type { SandboxConfig } from '@/types'

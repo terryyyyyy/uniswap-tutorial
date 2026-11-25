@@ -1,87 +1,37 @@
-# 🦄 Uniswap V3 合约交互式教程
+# Uniswap v4 互动教程
 
-一个由浅入深、闯关式学习 Uniswap V3 合约设计理念与实现细节的中文交互教程。8 章 35 关，纯前端 BigInt 模拟引擎，无需连接区块链即可交互实操。
+六个主题各对应一节课。每节先动手理解应用原理，再在同一页面沿 Solidity 调用链阅读对应的实现，最后可用 Foundry 验证合约行为。应用和实现两项测验都通过后计为一课完成，进度保存在浏览器里。
 
-## ✨ 特性
+| 主题 | 应用原理与实验 | Solidity 实现 |
+| --- | --- | --- |
+| 兑换 | 调整 USDC 输入，比较报价与价格影响 | `V4Router`、`Pool.swap`、`SwapMath`、Tick 搜索与部分成交 |
+| 集中流动性 | 让价格穿过仓位边界 | `PositionManager`、仓位 salt、`liquidityGross/Net`、crossing 与费用增长 |
+| PoolManager | 比较 v3 和 v4 的池结构 | `PoolKey` 校验、ABI 编码与 PoolId、Slot0 和读取接口 |
+| Hooks | 配置回调并播放一笔兑换 | 地址权限、selector、指定币 Delta 与 Hook 记账 |
+| 动态费率 | 比较固定和动态费率 | pips、持久更新、单次覆盖与协议费分成 |
+| 净额结算 | 演练两跳兑换及回滚 | `unlockCallback`、动作分发、临时存储、`sync/settle/take` 和退出检查 |
 
-- **闯关式学习**：8 章 35 关，线性解锁，星星评分 + 徽章成就
-- **三阶段闭环**：每关「📖 知识讲解 → 💻 沙盒实操 → ✅ 测验验证」
-- **纯前端模拟**：BigInt 精确复刻 V3 合约数学，无需钱包/测试币
-- **代码沙盒**：Web Worker 隔离执行用户代码，注入模拟 API
-- **11 个可视化组件**：流动性图、Tick 数轴、Swap 动画、手续费曲线等
-- **Markdown 教程**：支持 LaTeX 公式、源码片段引用、自定义提示框
-- **深色科技风 UI**：响应式布局，桌面/平板/移动端适配
-
-## 📚 章节概览
-
-| 章 | 标题 | 关卡 | 核心内容 |
-|---|---|---|---|
-| 1 | AMM 基础 | 4 | 恒定乘积公式、滑点、V2 局限 |
-| 2 | 集中流动性 | 4 | 价格区间、流动性 L、资本效率 |
-| 3 | Tick 机制 | 5 | tick 离散化、tickSpacing、位图遍历 |
-| 4 | 仓位管理 | 4 | Position、mint/burn/collect、NFT |
-| 5 | Swap 执行 | 5 | computeSwapStep、跨 tick、价格影响 |
-| 6 | 手续费计算 | 4 | feeGrowth、区间分配、惰性结算 |
-| 7 | 核心合约源码 | 5 | Factory、Pool、slot0、NoDelegateCall |
-| 8 | 外围合约 | 4 | SwapRouter、NPM、Quoter、毕业项目 |
-
-## 🚀 快速开始
+## 运行网页
 
 ```bash
-# 安装依赖
-npm install
-
-# 启动开发服务器
+npm ci
 npm run dev
-
-# 运行模拟引擎测试
 npm test
-
-# 生产构建
 npm run build
 ```
 
-打开浏览器访问 `http://localhost:5174`，从第 1 章第 1 关开始闯关。
+开发站点默认端口为 5174。部署 `dist/` 时，应用路由需要回退到 `index.html`。课程使用 `/lesson/:id`。旧链接 `/implementation/:id` 会跳转到同一课的 Solidity 实现段。原版 v3 可从页脚或 `/v3` 打开，原章节和数字课时链接仍会跳转到对应页面。
 
-## 🧠 学习路径建议
+## Foundry 实操
 
-1. **按顺序通关**：章节间线性解锁，前置知识是后置关卡的基础
-2. **动手改沙盒**：每关沙盒代码可修改参数，观察模拟结果变化
-3. **善用提示**：卡住时可点「💡 提示」，但不用提示能得更高星数（3 星）
-4. **对照源码**：教程引用了 `v3-core` / `v3-periphery` 真实源码片段，建议配合阅读
+安装 Foundry 后，在项目根目录运行以下命令。首次 setup 需要访问 GitHub，Foundry 会按配置使用 Solidity 0.8.26 和 Cancun。测试在本地 EVM 部署官方 PoolManager，并用教学路由器接入官方 V4Router。测试资金由本地 mock 合约提供。
 
-## 🏗️ 技术架构
-
-三层架构：
-
-- **模拟引擎层**（`src/simulations/`）：纯 TypeScript + BigInt，1:1 复刻 V3 合约库（FullMath、TickMath、SwapMath、SqrtPriceMath、TickBitmap、Pool 等），对照 `v3-core/contracts/libraries/` 源码实现，38 个单元测试验证
-- **应用层**（`src/components/` + `src/stores/` + `src/sandbox/`）：Vue3 组件 + Pinia 状态 + Web Worker 沙盒
-- **内容层**（`src/data/`）：35 关 Markdown 教程 + 题库 + 源码片段，与代码解耦
-
-### 技术栈
-
-Vue 3 · TypeScript · Vite · Element Plus · Pinia · Vue Router · markdown-it · KaTeX · highlight.js · ECharts · Sass · vitest
-
-## 📂 项目结构
-
-```
-src/
-├── simulations/    # 模拟引擎（BigInt，对照合约源码）
-├── sandbox/        # Web Worker 代码沙盒
-├── stores/         # Pinia 状态（进度持久化）
-├── components/     # layout / lesson / visual / markdown / game
-├── views/          # Home / Chapter / Lesson
-├── data/           # chapters / badges / lessons(35) / snippets
-└── markdown/       # markdown-it 插件（容器/代码引用/公式）
+```bash
+npm run solidity:setup
+npm run solidity:test
+forge test --root solidity-lab --match-test testSwap -vvvv
 ```
 
-## 🙏 致谢
+六个主题的测试前缀依次是 `testSwap`、`testLiquidity`、`testPoolId`、`testHook`、`testFee`、`testSettlement`。每节课的 Solidity 实现段提供对应命令和修改练习。浏览器实验里的单步定点算术、PoolKey 哈希等有独立测试，完整回调、状态写入和回滚行为可在 Foundry trace 中观察。
 
-- [Uniswap V3 Core](https://github.com/Uniswap/v3-core) — 模拟引擎的数学真值来源
-- [Uniswap V3 Periphery](https://github.com/Uniswap/v3-periphery) — LiquidityAmounts 等库参考
-
-本教程的模拟引擎为教学精度实现（行为等价，非字节级匹配），核心数学取整方向与合约一致，适合学习理解 V3 设计。如需生产级精度请直接使用合约。
-
-## 📄 License
-
-MIT
+源码链接固定在 [v4-core 59d3ecf5](https://github.com/Uniswap/v4-core/tree/59d3ecf53afa9264a16bba0e38f4c5d2231f80bc) 和 [v4-periphery c6e4754d](https://github.com/Uniswap/v4-periphery/tree/c6e4754dab11bd38c6f08ac51c3c868569e93d64)。Core 版本与所选 Periphery 的子模块一致。

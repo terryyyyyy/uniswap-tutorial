@@ -1,5 +1,5 @@
 {
-  "name": "uniswap-v3-tutorial",
+  "name": "uniswap-v4-tutorial",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,9 +8,13 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "solidity:setup": "bash solidity-lab/setup.sh",
+    "solidity:test": "forge test --root solidity-lab"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@noble/hashes": "2.0.1",
     "@vscode/markdown-it-katex": "^1.1.2",
     "@vueuse/core": "^14.3.0",
     "echarts": "^6.1.0",

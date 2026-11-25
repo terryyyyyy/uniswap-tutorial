@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElButton } from 'element-plus'
 import { ref } from 'vue'
 import { chapters } from '@/data/chapters'
 import { useProgressStore } from '@/stores/progress'
@@ -6,7 +7,7 @@ import { useRouter } from 'vue-router'
 const store = useProgressStore()
 const router = useRouter()
 const collapsed = ref(false)
-const go = (id: number) => { if (store.isChapterUnlocked(id)) router.push(`/chapter/${id}`) }
+const go = (id: number) => { if (store.isChapterUnlocked(id)) router.push(`/v3/chapter/${id}`) }
 </script>
 <template>
   <nav class="sidebar" :class="{ collapsed }">

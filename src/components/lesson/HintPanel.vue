@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElButton } from 'element-plus'
 import { ref } from 'vue'
 import { useSandboxStore } from '@/stores/sandbox'
 
